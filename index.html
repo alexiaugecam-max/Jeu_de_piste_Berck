@@ -219,14 +219,13 @@ body.hc{--c-p:#0000CC;--c-pd:#000088;--c-pl:#FFF;--c-t:#000;
 .legend__ko{background:var(--c-ko-bg);color:var(--c-ko);border-color:var(--c-ko)}
 
 /* ---- HERO ACCUEIL ---- */
-.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;padding:clamp(1.5rem,5vw,3rem) clamp(1rem,5vw,2rem);
-  text-align:center;color:#fff}
+.hero{min-height:100svh;display:flex;flex-direction:column;
+  color:#fff;overflow:hidden}
+.hero__bannerwrap{width:100%;background:rgba(0,0,0,.12);flex-shrink:0}
+.hero__banner{width:100%;max-height:38vh;object-fit:contain;display:block;margin:0 auto}
+.hero__body{flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:clamp(1.25rem,5vw,2.5rem) clamp(1rem,5vw,2rem);text-align:center}
 .hero__em{font-size:clamp(4rem,15vw,5.5rem);margin-bottom:1rem;display:block}
-.hero__img{width:clamp(160px,40vw,220px);height:clamp(120px,30vw,165px);
-  border-radius:var(--r-lg);object-fit:contain;background:rgba(255,255,255,.12);
-  margin-bottom:1rem;display:block;
-  border:3px solid rgba(255,255,255,.85);box-shadow:0 8px 24px rgba(0,0,0,.3)}
 .hero__h1{font-size:clamp(1.625rem,5vw,2.375rem);font-weight:900;margin-bottom:.5rem}
 .hero__sub{font-size:clamp(.9375rem,2.5vw,1.0625rem);opacity:.9;
   margin-bottom:1.75rem;max-width:38ch;line-height:1.55}
@@ -650,7 +649,10 @@ function rWelcome(app){
   spk='Berck Aventure. Jeu de piste au départ de l\'UGECAM Centre La Molière, Boulevard de Paris. Cinq parcours vous attendent. Appuyez sur Choisir mon parcours.';
   app.innerHTML=`
 <div class="hero" style="background:linear-gradient(160deg,#003F75 0%,#005CA8 55%,#007BB3 100%)" role="banner">
-  <img class="hero__img" src="photos/ChatGPT%20Image%202%20juil.%202026%2C%2014_27_03.png" alt="Berck Aventure"/>
+  <div class="hero__bannerwrap">
+    <img class="hero__banner" src="photos/ChatGPT%20Image%202%20juil.%202026%2C%2014_27_03.png" alt="Berck Aventure"/>
+  </div>
+  <div class="hero__body">
   <h1 class="hero__h1">Berck Aventure</h1>
   <p class="hero__sub">Jeu de piste au départ de l'UGECAM Centre La Molière<br>Boulevard de Paris · Berck-sur-Mer</p>
   <div style="background:rgba(255,255,255,.13);border:2px solid rgba(255,255,255,.4);border-radius:var(--r-xl);
@@ -667,6 +669,7 @@ function rWelcome(app){
           aria-label="Voir les 5 parcours disponibles">
     <span aria-hidden="true">🚀</span> Choisir mon parcours !
   </button>
+  </div>
 </div>`;
 }
 
