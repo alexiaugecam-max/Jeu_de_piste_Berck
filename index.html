@@ -78,6 +78,13 @@ body.hc img{filter:brightness(.92) contrast(1.05)}
 .a11y{background:var(--c-card);border-bottom:2px solid var(--c-bol);
   padding:.5rem clamp(.75rem,3vw,1.5rem);display:flex;gap:.5rem;flex-wrap:wrap;
   align-items:center;position:sticky;top:0;z-index:1000}
+#a11y-fab{position:fixed;top:.875rem;right:.875rem;z-index:2000;
+  width:48px;height:48px;border-radius:50%;background:var(--c-card);
+  border:2px solid var(--c-bo);color:var(--c-t);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 12px rgba(0,0,0,.22);touch-action:manipulation}
+#a11y-fab:hover{background:var(--c-pl)}
+#a11y-fab:focus-visible{outline:3px solid var(--c-p);outline-offset:2px}
 .a11y__lbl{font-size:.8125rem;font-weight:700;color:var(--c-tm);
   text-transform:uppercase;letter-spacing:.05em;margin-right:.25rem}
 .a11y-btn{min-height:var(--tap);min-width:var(--tap);touch-action:manipulation;padding:.4rem .875rem;
@@ -352,14 +359,24 @@ body.dys{font-family:'OpenDyslexic',sans-serif!important;letter-spacing:.05em;wo
 <body>
 <a href="#main" class="skip">Aller au contenu principal</a>
 
-<nav class="a11y" aria-label="Options d'accessibilité">
-  <span class="a11y__lbl" aria-hidden="true">Accessibilité&nbsp;:</span>
-  <button class="a11y-btn" id="btn-dys" aria-pressed="false" onclick="toggleDys()" title="Police adaptée à la dyslexie">Aa Dyslexie</button>
-  <button class="a11y-btn" id="btn-hc"  aria-pressed="false" onclick="toggleHC()"  title="Mode sombre, fort contraste">🌙 Mode sombre</button>
-  <button class="a11y-btn" id="btn-big" aria-pressed="false" onclick="toggleBig()" title="Agrandir le texte">A+ Texte</button>
-  <button class="a11y-btn" onclick="doSpeak()"                   title="Lire à voix haute"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M17 8a5 5 0 0 1 0 8M19.5 5.5a9 9 0 0 1 0 13"/></svg> Lecture</button>
-  <button class="a11y-btn" onclick="speechSynthesis.cancel()"    title="Couper la lecture"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="m17 9 5 6M22 9l-5 6"/></svg> Couper la lecture</button>
-</nav>
+<button id="a11y-fab" onclick="openA11yModal()" aria-haspopup="dialog" aria-label="Ouvrir les options d'accessibilité" title="Accessibilité">
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+</button>
+
+<div id="a11y-modal" class="modal-ov" style="display:none" role="dialog" aria-modal="true" aria-label="Options d'accessibilité" onclick="if(event.target===this)closeA11yModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeA11yModal()" aria-label="Fermer">✕</button>
+    <div class="modal-h">Accessibilité</div>
+    <div class="modal-sub">Choisis les options qui te conviennent</div>
+    <div style="display:flex;flex-direction:column;gap:.625rem;margin-top:1rem">
+      <button class="a11y-btn" id="btn-dys" aria-pressed="false" onclick="toggleDys()" title="Police adaptée à la dyslexie">Aa Dyslexie</button>
+      <button class="a11y-btn" id="btn-hc"  aria-pressed="false" onclick="toggleHC()"  title="Mode sombre, fort contraste">🌙 Mode sombre</button>
+      <button class="a11y-btn" id="btn-big" aria-pressed="false" onclick="toggleBig()" title="Agrandir le texte">A+ Texte</button>
+      <button class="a11y-btn" onclick="doSpeak()" title="Lire à voix haute"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M17 8a5 5 0 0 1 0 8M19.5 5.5a9 9 0 0 1 0 13"/></svg> Lecture</button>
+      <button class="a11y-btn" onclick="speechSynthesis.cancel()" title="Couper la lecture"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="m17 9 5 6M22 9l-5 6"/></svg> Couper la lecture</button>
+    </div>
+  </div>
+</div>
 
 <main id="main"><div class="app" id="app"></div></main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -372,6 +389,14 @@ function toggleHC(){hc=!hc;document.body.classList.toggle('hc',hc);
   document.getElementById('btn-hc').setAttribute('aria-pressed',hc);}
 function toggleBig(){big=!big;document.documentElement.style.fontSize=big?'20px':'16px';
   document.getElementById('btn-big').setAttribute('aria-pressed',big);}
+function openA11yModal(){
+  document.getElementById('a11y-modal').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeA11yModal(){
+  document.getElementById('a11y-modal').style.display='none';
+  document.body.style.overflow='';
+}
 function doSpeak(){speechSynthesis.cancel();if(!spk)return;
   const u=new SpeechSynthesisUtterance(spk);u.lang='fr-FR';u.rate=.9;speechSynthesis.speak(u);}
 
@@ -457,6 +482,7 @@ const ICON_PATHS={
   book:'<path d="M4 4h7a3 3 0 0 1 3 3v13a2.5 2.5 0 0 0-2.5-2.5H4Z"/><path d="M20 4h-7a3 3 0 0 0-3 3v13a2.5 2.5 0 0 1 2.5-2.5H20Z"/>',
   wrench:'<path d="M14.5 3.5a4.5 4.5 0 0 0-5.9 5.9L3 15l3 3 5.6-5.6a4.5 4.5 0 0 0 5.9-5.9l-3.1 3.1-2-2 3.1-3.1Z"/>',
   storm:'<path d="M7 16a4 4 0 0 1 1-7.9 5 5 0 0 1 9.6 1.6A3.5 3.5 0 0 1 17 16H7Z"/><path d="M13 16l-2 4h3l-2 4"/>',
+  settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/>',
 };
 function ic(name,size=20,extra=''){
   const p=ICON_PATHS[name]||'';
@@ -485,6 +511,7 @@ const EMOJI_TO_ICON={
   '🐣':'egg','🚨':'alert','🌿':'leaf',
   '⛑️':'firstaid','🎣':'fishingRod','🐴':'horse','🐿️':'squirrel','🦅':'eagle',
   '🏁':'flagCheck','📚':'book','🔧':'wrench','🏅':'medal','🌩️':'storm',
+  '👨\u200d⚕️':'cross','👩\u200d🎨':'palette',
 };
 function infoIcon(text){
   const m=text.match(/^(\S+)\s(.*)$/s);
@@ -570,7 +597,7 @@ function closeNavModal(){
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape')closeNavModal();
+  if(e.key==='Escape'){closeNavModal();closeA11yModal();}
 });
 
 function buildMap(steps,cur,col){
