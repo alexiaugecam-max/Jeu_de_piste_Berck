@@ -43,13 +43,26 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 * {-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;}
 html{font-size:16px;-webkit-text-size-adjust:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+@font-face{
+  font-family:'AtkinsonHL';
+  src:url('https://cdn.jsdelivr.net/fontsource/fonts/atkinson-hyperlegible@latest/latin-400-normal.woff2') format('woff2');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'AtkinsonHL';
+  src:url('https://cdn.jsdelivr.net/fontsource/fonts/atkinson-hyperlegible@latest/latin-700-normal.woff2') format('woff2');
+  font-weight:700;font-style:normal;font-display:swap;
+}
+body{font-family:'AtkinsonHL',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
   background:var(--c-bg);color:var(--c-t);line-height:1.6;min-height:100svh}
 /* body.dys → voir @font-face ci-dessous */
-body.hc{--c-p:#0000CC;--c-pd:#000088;--c-pl:#FFF;--c-t:#000;
-  --c-card:#FFF;--c-bg:#FFF;--c-bo:#000;--c-bol:#444;
-  --c-ok:#003388;--c-ok-bg:#CCEEFF;--c-ko:#7A3000;--c-ko-bg:#FFEDD9;
-  --c-am:#3D2800;--c-am-bg:#FFF0B3}
+body.hc{--c-p:#7FC4FF;--c-pd:#BFE0FF;--c-pl:#132A3D;--c-t:#F5F7FA;
+  --c-ts:#D8DDE4;--c-tm:#A9B0BA;
+  --c-card:#1C1F24;--c-bg:#101215;--c-bo:#8A909A;--c-bol:#3C4149;
+  --c-ok:#7FC4FF;--c-ok-bg:#0F2C42;--c-ko:#FFB877;--c-ko-bg:#3B2408;
+  --c-am:#FFDD8A;--c-am-bg:#3A2E06}
+body.hc .stepimg{background:#1C1F24!important}
+body.hc img{filter:brightness(.92) contrast(1.05)}
 
 /* ---- SKIP LINK ---- */
 .skip{position:absolute;top:-120px;left:1rem;background:var(--c-p);color:#fff;
@@ -227,28 +240,35 @@ body.hc{--c-p:#0000CC;--c-pd:#000088;--c-pl:#FFF;--c-t:#000;
   justify-content:center;padding:clamp(1.25rem,5vw,2.5rem) clamp(1rem,5vw,2rem);text-align:center}
 .hero__em{font-size:clamp(4rem,15vw,5.5rem);margin-bottom:1rem;display:block}
 .hero__h1{font-size:clamp(1.625rem,5vw,2.375rem);font-weight:900;margin-bottom:.5rem}
-.hero__sub{font-size:clamp(.9375rem,2.5vw,1.0625rem);opacity:.9;
+.hero__sub{font-size:clamp(1rem,2.5vw,1.0625rem);opacity:.95;
   margin-bottom:1.75rem;max-width:38ch;line-height:1.55}
 .hero__cta{min-height:var(--tap);touch-action:manipulation;background:#fff;border:3px solid #fff;
   border-radius:var(--r-md);font-size:clamp(1rem,2.5vw,1.125rem);font-weight:900;
   padding:.875rem 2rem;cursor:pointer;font-family:inherit;
-  transition:background .15s,transform .1s;width:100%;max-width:440px;
-  display:flex;align-items:center;justify-content:center;gap:.5rem}
+  transition:background .15s ease,transform .15s ease,box-shadow .15s ease;width:100%;max-width:440px;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  box-shadow:0 4px 14px rgba(0,0,0,.22)}
+.hero__cta:hover{background:#F0F6FC;box-shadow:0 6px 18px rgba(0,0,0,.28);transform:translateY(-1px)}
 .hero__cta:active{transform:scale(.98)}
+.hero__cta:focus-visible{outline:3px solid #fff;outline-offset:4px;box-shadow:0 0 0 6px rgba(255,255,255,.35)}
 
 /* ---- SÉLECTION PARCOURS ---- */
 .rcard{background:var(--c-card);border-radius:var(--r-xl);margin-bottom:1rem;touch-action:manipulation;
   box-shadow:0 3px 14px rgba(0,0,0,.09);overflow:hidden;cursor:pointer;
-  transition:transform .15s;border:1px solid var(--c-bol)}
+  transition:transform .15s ease,box-shadow .15s ease;border:1px solid var(--c-bol)}
+.rcard:hover{transform:scale(1.012);box-shadow:0 6px 20px rgba(0,0,0,.14)}
 .rcard:active{transform:scale(.98)}
+.rcard:focus-visible{outline:3px solid var(--c-p);outline-offset:2px;box-shadow:0 6px 20px rgba(0,0,0,.16)}
 .rcard__head{padding:1.125rem 1.25rem .75rem;display:flex;align-items:center;gap:.875rem}
 .rcard__body{padding:0 1.25rem 1.25rem}
 .mission{background:var(--c-am-bg);border:2px dashed var(--c-am);
   border-radius:var(--r-md);padding:.75rem 1rem;color:var(--c-am);
-  font-size:.9375rem;font-weight:700;margin-top:.625rem}
-.badge-pill{display:inline-flex;align-items:center;gap:.3rem;padding:.3rem .75rem;
-  border-radius:100px;font-size:.8125rem;font-weight:700;border:2px solid;
-  margin:.25rem .25rem 0 0}
+  font-size:1rem;font-weight:700;margin-top:.625rem}
+.badge-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;margin-top:.25rem}
+@media(min-width:420px){.badge-row{grid-template-columns:repeat(4,auto);justify-content:start}}
+.badge-pill{display:inline-flex;align-items:center;justify-content:center;gap:.35rem;padding:.4rem .75rem;
+  border-radius:100px;font-size:.875rem;font-weight:700;border:2px solid;line-height:1.3}
+.rcard__sub{font-size:1rem;color:var(--c-ts);margin-top:.125rem;font-weight:500}
 
 /* ---- HEADER JEU ---- */
 .sechead{display:flex;align-items:center;justify-content:space-between;
@@ -258,18 +278,37 @@ body.hc{--c-p:#0000CC;--c-pd:#000088;--c-pl:#FFF;--c-t:#000;
   white-space:nowrap}
 
 /* ---- DIPLÔME FINAL ---- */
-.diploma{background:var(--c-card);border:3px solid var(--c-p);
-  border-radius:var(--r-xl);padding:clamp(1.25rem,4vw,2rem);
-  text-align:center;margin-bottom:1rem}
-.diploma__ic{font-size:clamp(3.5rem,12vw,5rem);display:block;
-  animation:bounce .9s ease 2;margin-bottom:.5rem}
+.diploma{background:var(--c-card);border:1px solid var(--c-bol);position:relative;overflow:hidden;
+  border-radius:var(--r-xl);padding:clamp(2rem,6vw,3rem) clamp(1.5rem,5vw,2.25rem);
+  text-align:center;margin-bottom:1rem;
+  box-shadow:0 4px 18px rgba(0,0,0,.07)}
+.diploma::before,.diploma::after{content:'';position:absolute;left:10px;right:10px;height:6px;
+  background:repeating-linear-gradient(90deg,var(--diploma-col,#005CA8) 0 8px,transparent 8px 14px);opacity:.55}
+.diploma::before{top:10px}
+.diploma::after{bottom:10px}
+.diploma__watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:min(70%,320px);height:min(70%,320px);opacity:.05;color:var(--diploma-col,#005CA8);
+  pointer-events:none;z-index:0}
+.diploma__content{position:relative;z-index:1}
+.diploma__ic{display:block;margin:0 auto .75rem;color:var(--diploma-col,#005CA8);
+  animation:bounce .9s ease 2}
 @keyframes bounce{0%,100%{transform:translateY(0)}40%{transform:translateY(-20px)}70%{transform:translateY(-8px)}}
-.diploma__h{font-size:clamp(1.25rem,4vw,1.625rem);font-weight:900;
-  color:var(--c-pd);margin-bottom:.25rem}
-.diploma__sub{font-size:.9375rem;color:var(--c-tm);margin-bottom:1.25rem}
-.diploma__seal{background:var(--c-pl);border:2px solid var(--c-p);
-  border-radius:var(--r-md);padding:1rem;font-size:1rem;
-  color:var(--c-pd);font-weight:700;line-height:1.7}
+.diploma__eyebrow{font-size:.8125rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--c-tm);margin-bottom:.5rem}
+.diploma__h{font-size:clamp(1.375rem,4.5vw,1.75rem);font-weight:900;
+  color:var(--c-t);margin-bottom:1.25rem}
+.diploma__sub{font-size:.9375rem;color:var(--c-tm);margin-bottom:.5rem}
+.diploma__seal{padding:0 .5rem;font-size:1.0625rem;
+  color:var(--c-t);font-weight:600;line-height:1.85;margin-bottom:1.5rem}
+.diploma__seal strong{color:var(--diploma-col,#005CA8)}
+.diploma__stamp{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
+  width:104px;height:104px;border-radius:50%;border:3px dashed var(--diploma-col,#005CA8);
+  color:var(--diploma-col,#005CA8);transform:rotate(-8deg);margin:0 auto 1.25rem;
+  font-size:.6875rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;line-height:1.3;
+  background:color-mix(in srgb, var(--diploma-col,#005CA8) 6%, transparent)}
+.diploma__num{font-size:.75rem;color:var(--c-bo);letter-spacing:.05em;margin-top:1.5rem}
+.diploma__brand{display:flex;align-items:center;justify-content:center;gap:.4rem;
+  margin-top:.375rem;font-size:.8125rem;font-weight:800;color:var(--c-tm)}
 
 /* ---- RÉCAP FINAL ---- */
 .rcap{display:flex;align-items:center;gap:.75rem;padding:.75rem .875rem;
@@ -284,15 +323,30 @@ body.hc{--c-p:#0000CC;--c-pd:#000088;--c-pl:#FFF;--c-t:#000;
 /* OpenDyslexic chargée en avance pour éviter le fallback Comic Sans */
 @font-face{
   font-family:'OpenDyslexic';
-  src:url('https://cdn.jsdelivr.net/npm/opendyslexic@1.0.3/fonts/OpenDyslexic-Regular.otf') format('opentype');
+  src:url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/woff/OpenDyslexic-Regular.woff') format('woff');
   font-weight:normal;font-style:normal;font-display:swap;
 }
 @font-face{
   font-family:'OpenDyslexic';
-  src:url('https://cdn.jsdelivr.net/npm/opendyslexic@1.0.3/fonts/OpenDyslexic-Bold.otf') format('opentype');
+  src:url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/woff/OpenDyslexic-Bold.woff') format('woff');
   font-weight:bold;font-style:normal;font-display:swap;
 }
 body.dys{font-family:'OpenDyslexic',sans-serif!important;letter-spacing:.05em;word-spacing:.1em;line-height:1.85}
+
+/* ---- RESPECT DE prefers-reduced-motion (neurodiversité, confort visuel) ---- */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .mk-cur{animation:none}
+  .diploma__ic{animation:none}
+}
+
+/* ---- RESPECT DE prefers-contrast:more (contours renforcés) ---- */
+@media(prefers-contrast:more){
+  .rcard,.card,.opt,.badge-pill,.a11y-btn,.mission,.hint,.info-card,.fbbox,.diploma{border-width:3px!important}
+  .mission{border-style:solid}
+  .rcard{border-width:2px}
+}
 </style>
 </head>
 <body>
@@ -300,11 +354,11 @@ body.dys{font-family:'OpenDyslexic',sans-serif!important;letter-spacing:.05em;wo
 
 <nav class="a11y" aria-label="Options d'accessibilité">
   <span class="a11y__lbl" aria-hidden="true">Accessibilité&nbsp;:</span>
-  <button class="a11y-btn" id="btn-dys" aria-pressed="false" onclick="toggleDys()" title="Police OpenDyslexic">Aa Dys</button>
-  <button class="a11y-btn" id="btn-hc"  aria-pressed="false" onclick="toggleHC()"  title="Contraste élevé">◐ Contraste</button>
-  <button class="a11y-btn" id="btn-big" aria-pressed="false" onclick="toggleBig()" title="Texte plus grand">T↑ Grand</button>
-  <button class="a11y-btn" onclick="doSpeak()"                   title="Synthèse vocale">🔊 Lire</button>
-  <button class="a11y-btn" onclick="speechSynthesis.cancel()"    title="Arrêter la lecture">⏹ Silence</button>
+  <button class="a11y-btn" id="btn-dys" aria-pressed="false" onclick="toggleDys()" title="Police adaptée à la dyslexie">Aa Dyslexie</button>
+  <button class="a11y-btn" id="btn-hc"  aria-pressed="false" onclick="toggleHC()"  title="Mode sombre, fort contraste">🌙 Mode sombre</button>
+  <button class="a11y-btn" id="btn-big" aria-pressed="false" onclick="toggleBig()" title="Agrandir le texte">A+ Texte</button>
+  <button class="a11y-btn" onclick="doSpeak()"                   title="Lire à voix haute"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M17 8a5 5 0 0 1 0 8M19.5 5.5a9 9 0 0 1 0 13"/></svg> Lecture</button>
+  <button class="a11y-btn" onclick="speechSynthesis.cancel()"    title="Couper la lecture"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="m17 9 5 6M22 9l-5 6"/></svg> Couper la lecture</button>
 </nav>
 
 <main id="main"><div class="app" id="app"></div></main>
@@ -323,6 +377,65 @@ function doSpeak(){speechSynthesis.cancel();if(!spk)return;
 
 /* ============================================================  CARTE  */
 let MAP=null;
+/* ============================================================  ICÔNES SVG
+   Bibliothèque d'icônes cohérentes (style traits, 2px, arrondi) pour
+   remplacer les emojis fonctionnels de l'interface (homogène iOS/Android). */
+const ICON_PATHS={
+  anchor:'<circle cx="12" cy="5" r="2"/><path d="M12 7v13M5 12H2a10 10 0 0 0 20 0h-3"/><path d="M8 9l4-2 4 2"/>',
+  landmark:'<path d="M3 21h18M4 21V10M20 21V10M2 10l10-6 10 6M9 21v-7M15 21v-7"/>',
+  trees:'<path d="M12 2 7 9h2l-3.5 5H8L4 20h8M14 20h6l-4-6h2.5L15 9h2l-5-7"/><path d="M12 15v7"/>',
+  waves:'<path d="M2 17c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/><path d="M2 11c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/>',
+  lighthouse:'<path d="M9 22h6M8 22l1-13h6l1 13M10 9V4l2-2 2 2v5M6 9h12M2 13l3 1M22 13l-3 1M2 9l3 1M22 9l-3 1"/>',
+  map:'<path d="M9 20 3 17V4l6 3m0 13 6-3m-6 3V7m6 10 6 3V7l-6-3m0 16V4m0 3L9 4"/>',
+  ruler:'<path d="M3 17 17 3l4 4L7 21l-4-4Z"/><path d="m14.5 5.5 2 2M11 9l2 2M7.5 12.5l2 2"/>',
+  wheelchair:'<circle cx="8" cy="18" r="3"/><circle cx="18" cy="5" r="1.5"/><path d="M8 18V10h6l4 8M8 10 10 4h3M8 14h7"/>',
+  medal:'<circle cx="12" cy="15" r="6"/><path d="m9 10-3-7M15 10l3-7M9 3h6"/>',
+  palette:'<path d="M12 2a10 10 0 1 0 0 20c1 0 1.5-.5 1.5-1.5S13 19 13 18a2 2 0 0 1 2-2h2a3 3 0 0 0 3-3 8 8 0 0 0-8-11Z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/>',
+  gift:'<rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 9h18v4H3zM12 9v12M12 9C10 5 7 5 7 7s2 2 5 2ZM12 9c2-4 5-4 5-2s-2 2-5 2Z"/>',
+  pin:'<path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/>',
+  flag:'<path d="M5 21V4M5 5h13l-3 4 3 4H5"/>',
+  compass:'<circle cx="12" cy="12" r="9.5"/><path d="m14.5 9.5-2 5-5 2 2-5 5-2Z"/>',
+  flagCheck:'<path d="M5 21V4M5 5h6l1 1h7l-2 3 2 3h-7l-1-1H5"/>',
+  bulb:'<path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.7.6 1 1.4 1 2.5h6c0-1.1.3-1.9 1-2.5A6 6 0 0 0 12 2Z"/>',
+  checkCircle:'<circle cx="12" cy="12" r="9.5"/><path d="m8 12.5 2.5 2.5L16 9"/>',
+  xCircle:'<circle cx="12" cy="12" r="9.5"/><path d="m9 9 6 6M15 9l-6 6"/>',
+  trophy:'<path d="M8 3h8v6a4 4 0 0 1-8 0V3Z"/><path d="M8 5H4v2a4 4 0 0 0 4 4M16 5h4v2a4 4 0 0 1-4 4M10 16h4M12 13v3M8 21h8l-1-4h-6l-1 4Z"/>',
+  medalNum:'<circle cx="12" cy="14" r="7"/><path d="m8 8-2.5-6M16 8l2.5-6M6 2h5" fill="none"/>',
+  refresh:'<path d="M3 12a9 9 0 0 1 15.3-6.4M21 12a9 9 0 0 1-15.3 6.4"/><path d="M18 3v4h-4M6 21v-4h4"/>',
+  home:'<path d="m3 11 9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
+  arrowLeft:'<path d="M19 12H5M11 18l-6-6 6-6"/>',
+  arrowRight:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  cap:'<path d="m2 9 10-5 10 5-10 5-10-5Z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5M22 9v6"/>',
+  clipboard:'<rect x="5" y="4" width="14" height="18" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 11h6M9 15h6"/>',
+  walk:'<circle cx="13" cy="4" r="1.75"/><path d="m10 8 3-1 2.5 2.5L18 11M9 22l1.5-6L8 14l1-5 4-1 3 3-1 3 2 5M8 22l2.5-6"/>',
+  cross:'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/>',
+  smile:'<circle cx="12" cy="12" r="9.5"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
+  volume:'<path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M17 8a5 5 0 0 1 0 8M19.5 5.5a9 9 0 0 1 0 13"/>',
+  volumeMute:'<path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="m17 9 5 6M22 9l-5 6"/>',
+  star:'<path d="M12 2.5 15 9l7 1-5 5 1.5 7-6.5-3.5L5 22l1.5-7-5-5 7-1 3.5-6.5Z"/>',
+  circleO:'<circle cx="12" cy="12" r="8.5"/>',
+  arrowUp:'<path d="M12 19V5M6 11l6-6 6 6"/>',
+  hourglass:'<path d="M6 2h12M6 22h12M7 2c0 6 5 6 5 10s-5 4-5 10M17 2c0 6-5 6-5 10s5 4 5 10"/>',
+  photo:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-4 4-3-3-6 6"/>',
+};
+function ic(name,size=20,extra=''){
+  const p=ICON_PATHS[name]||'';
+  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-${Math.round(size*0.15)}px;flex-shrink:0;${extra}" aria-hidden="true">${p}</svg>`;
+}
+function icFull(name){
+  const p=ICON_PATHS[name]||'';
+  return `<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+}
+function diplomaNum(routeId,dateObj){
+  const y=dateObj.getFullYear();
+  const seed=(routeId*137+dateObj.getMonth()*31+dateObj.getDate()*7+dateObj.getHours()*3+dateObj.getMinutes())%9973;
+  return `BA-${y}-${String(seed).padStart(5,'0')}`;
+}
+/* Icône de direction (boussole) : une seule flèche pivotée selon le cap, plutôt que 8 emojis */
+function icArrow(deg,size=20,color){
+  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="${color||'currentColor'}" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-${Math.round(size*0.15)}px;flex-shrink:0;transform:rotate(${deg}deg)" aria-hidden="true"><path d="M12 20V4M12 4l-5 5M12 4l5 5"/></svg>`;
+}
+
 function killMap(){if(MAP){MAP.remove();MAP=null;}}
 
 /* ============================================================  GUIDAGE (distance + direction) */
@@ -340,9 +453,8 @@ function bearingLabel(a,b){
   const x=Math.cos(la1)*Math.sin(la2)-Math.sin(la1)*Math.cos(la2)*Math.cos(dLon);
   let deg=(Math.atan2(y,x)*180/Math.PI+360)%360;
   const dirs=['Nord','Nord-Est','Est','Sud-Est','Sud','Sud-Ouest','Ouest','Nord-Ouest'];
-  const arrows=['⬆️','↗️','➡️','↘️','⬇️','↙️','⬅️','↖️'];
   const i=Math.round(deg/45)%8;
-  return {label:dirs[i],arrow:arrows[i]};
+  return {label:dirs[i],deg:Math.round(deg)};
 }
 function navHint(steps,idx){
   if(idx===0)return null; // le départ n'a pas de direction (c'est le point 0)
@@ -350,7 +462,7 @@ function navHint(steps,idx){
   const d=Math.round(distM(from,to));
   const b=bearingLabel(from,to);
   const dtxt=d>=1000?(d/1000).toFixed(1).replace('.',',')+' km':d+' m';
-  return {dist:dtxt,dir:b.label,arrow:b.arrow};
+  return {dist:dtxt,dir:b.label,deg:b.deg};
 }
 
 /* ============================================================  RUES CONNUES
@@ -430,14 +542,14 @@ function buildMap(steps,cur,col){
    GPS référence Office de Tourisme : 50.405087 / 1.56027 (B7 sur le plan)
    ============================================================ */
 const ROUTES=[
-  {id:1,ic:'⚓',col:'#005CA8',cd:'#003F75',cl:'#E8F1F9',nm:'Les Pêcheurs',ds:'La vie des pêcheurs de Berck-Ville',acc:'♿ Accessible en fauteuil',dist:'3,9 km',time:'1h09',mission:'Trouve et photographie un symbole de la mer sur un bâtiment (ancre, poisson ou bateau).',
+  {id:1,ic:'anchor',col:'#005CA8',cd:'#003F75',cl:'#E8F1F9',nm:'Les Pêcheurs',ds:'La vie des pêcheurs de Berck-Ville',acc:'♿ Accessible en fauteuil',dist:'3,9 km',time:'1h09',mission:'Trouve et photographie un symbole de la mer sur un bâtiment (ancre, poisson ou bateau).',
   steps:[
     {nm:'Départ — Centre La Molière',c:[50.403718,1.569736],vi:{bg:'linear-gradient(135deg,#003F75,#005CA8)',em:'⚓',cap:'Départ — La Molière'},img:'photos/lamolliere.png',rd:'Tu es devant le Centre La Molière. Avant de partir à l\'aventure, voici un petit peu de son histoire.',q:'En quelle année le Centre La Molière a-t-il été créé ?',op:['En 1952, par la Sécurité Sociale','En 1900, comme hôpital pour enfants malades','En 1985, par la Région Hauts-de-France'],ok:0,wy:'Le Centre La Molière a été créé en 1952 par la Sécurité Sociale. Aujourd\'hui, il est géré par l\'UGECAM (Union pour la Gestion des Établissements de Caisses d\'Assurance Maladie) des Hauts-de-France. Il aide des personnes en situation de handicap à préparer un métier, grâce à des formations comme agent de restauration, soudeur, vendeur ou agent d\'entretien.',anec:'🏅 Le centre est installé au 19-21 Boulevard de Paris, exactement là où commence notre jeu de piste ! Il accueille aujourd\'hui plus de 150 personnes pour les accompagner vers un nouveau métier.'},
     {nm:'L\'Église Saint-Jean-Baptiste',c:[50.411501,1.590063],vi:{bg:'linear-gradient(135deg,#005CA8,#003F75)',em:'⛪',cap:'Église St-Jean-Baptiste'},img:'photos/%C3%89glise_Saint-Jean-Baptiste_%C3%A0_Berck.jpg',rd:'Voici l\'Église Saint-Jean-Baptiste. Elle est très ancienne. Elle a été construite entre le 13e et le 17e siècle. Regarde la tour du clocher.',q:'À quoi servait la tour du clocher la nuit ?',op:['On y sonnait les cloches toute la nuit','On y allumait un grand feu pour guider les bateaux','On y gardait le poisson au frais'],ok:1,wy:'Chaque soir, un gardien allumait un grand feu au sommet de la tour. Ce feu s\'appelait le «\u00a0Foïer\u00a0». Les pêcheurs le voyaient de loin. Cela les guidait pour rentrer chez eux.',anec:'🌩️ Le 21 octobre 1780, la foudre a tué le gardien au sommet de la tour. Il a été enterré le lendemain.'},
     {nm:'L\'Hôtel de Ville',c:[50.408437,1.592761],vi:{bg:'linear-gradient(135deg,#003F75,#005CA8)',em:'🏛️',cap:'Hôtel de Ville 1893'},img:'photos/Berck_-_H%C3%B4tel-de-Ville_21.jpg',rd:'Voici la Mairie de Berck. Elle a été construite en 1893. Regarde les pierres bleues en bas et la tour avec l\'horloge en haut.',q:'Qu\'est-ce qu\'il y avait sur cette place avant les bombardements de 1944 ?',op:['Un grand jardin fleuri','Un marché couvert pour vendre le poisson','Une grande fontaine'],ok:1,wy:'Sur la place, il y avait un marché aux poissons. Il avait 10 tables en pierre. Chaque jour, les pêcheurs vendaient leur poisson frais ici. Il a été détruit en 1944.',anec:'🎨 La grande salle de la Mairie a un plafond peint par un artiste nommé Jan Lavezzari. Il a peint des scènes de la vie des pêcheurs en 1908 et 1909.'},
     {nm:'Les Maisons de Pêcheurs',c:[50.409270,1.590120],vi:{bg:'linear-gradient(135deg,#005CA8,#003F75)',em:'🏠',cap:'Maisons de pêcheurs'},img:'photos/bateaudepeche.png',rd:'Regarde ces petites maisons basses en briques. Ce sont les maisons des anciens pêcheurs. On les protège car elles font partie de l\'histoire de Berck.',q:'Comment transportait-on le poisson vers Paris avant le train ?',op:['Par bateau jusqu\'à Paris','À cheval dans des charrettes appelées «\u00a0ballons\u00a0»','Par char à voile sur la plage'],ok:1,wy:'Les pêcheurs utilisaient des charrettes tirées par des chevaux. On les appelait des «\u00a0ballons\u00a0». Leurs conducteurs s\'appelaient «\u00a0chasse-marées\u00a0». Ils allaient très vite pour garder le poisson frais.',anec:'🐴 Ces chevaux étaient des chevaux boulonnais. C\'est une race du nord de la France. Ils étaient grands, forts, et parfaits pour ce travail.'}
   ]},
-  {id:2,ic:'🏛️',col:'#9B1B62',cd:'#650F40',cl:'#F7E5EF',nm:'Le Cœur Balnéaire',ds:'Casino, Kursaal, église et marché du centre',acc:'♿ Accessible en fauteuil',dist:'1,7 km',time:'59 min',mission:'Prends en photo un beau détail sur une façade : fenêtre arrondie, sculpture ou dessin en brique.',
+  {id:2,ic:'landmark',col:'#9B1B62',cd:'#650F40',cl:'#F7E5EF',nm:'Le Cœur Balnéaire',ds:'Casino, Kursaal, église et marché du centre',acc:'♿ Accessible en fauteuil',dist:'1,7 km',time:'59 min',mission:'Prends en photo un beau détail sur une façade : fenêtre arrondie, sculpture ou dessin en brique.',
   steps:[
     {nm:'Départ — Centre La Molière',c:[50.403718,1.569736],vi:{bg:'linear-gradient(135deg,#650F40,#9B1B62)',em:'🏛️',cap:'Départ — La Molière'},img:'photos/lamolliere.png',rd:'Tu es devant le Centre La Molière. Avant de partir à l\'aventure, voici un petit peu de son histoire.',q:'En quelle année le Centre La Molière a-t-il été créé ?',op:['En 1952, par la Sécurité Sociale','En 1900, comme hôpital pour enfants malades','En 1985, par la Région Hauts-de-France'],ok:0,wy:'Le Centre La Molière a été créé en 1952 par la Sécurité Sociale. Aujourd\'hui, il est géré par l\'UGECAM (Union pour la Gestion des Établissements de Caisses d\'Assurance Maladie) des Hauts-de-France. Il aide des personnes en situation de handicap à préparer un métier, grâce à des formations comme agent de restauration, soudeur, vendeur ou agent d\'entretien.',anec:'🏅 Le centre est installé au 19-21 Boulevard de Paris, exactement là où commence notre jeu de piste ! Il accueille aujourd\'hui plus de 150 personnes pour les accompagner vers un nouveau métier.'},
     {nm:'Le Musée Opale Sud',c:[50.405137,1.567641],vi:{bg:'linear-gradient(135deg,#9B1B62,#650F40)',em:'🎨',cap:'Musée Opale Sud'},img:'photos/Le%20Mus%C3%A9e%20Opale%20Sud.jpg',rd:'Le Musée Opale Sud est rue de l\'Impératrice. Il garde les tableaux des peintres de Berck. Il a aussi des objets de la vie des pêcheurs : filets, paniers, vêtements.',q:'Un peintre a décoré une chapelle pour dire merci aux soignants de Berck. Qui est-ce ?',op:['Jan Lavezzari','Francis Tattegrain','Albert Besnard'],ok:2,wy:'Le peintre Albert Besnard a décoré toute une chapelle. C\'était pour dire merci. Son fils avait été soigné et guéri à Berck pendant 2 ans. Il a peint des grandes images sur les murs.',anec:'📅 Le Musée Opale Sud fait des expositions toute l\'année. Il est au 60 rue de l\'Impératrice. Tu peux y découvrir l\'histoire de Berck.'},
@@ -447,7 +559,7 @@ const ROUTES=[
     {nm:'Le Marché Couvert',c:[50.404015,1.564152],vi:{bg:'linear-gradient(135deg,#9B1B62,#650F40)',em:'🐟',cap:'Marché couvert'},img:'images/berck-vue-aerienne.jpg',rd:'Voici le Marché Couvert, rue des Halles. Le premier marché couvert de Berck-Plage a été construit en 1895. Le marché a lieu le mercredi et le samedi matin.',q:'Quels jours peut-on faire son marché à Berck-Ville, près de la Mairie ?',op:['Lundi et mercredi matin','Jeudi et samedi soir','Mardi, vendredi et dimanche matin'],ok:2,wy:'Le marché de Berck-Ville est devant la Mairie. Il a lieu le mardi, vendredi et dimanche matin. Le marché de Berck-Plage, lui, est ici aux Halles le mercredi et samedi matin.',anec:'🎣 La Bénédiction de la Mer a lieu chaque année à la mi-août. Il y a une messe à l\'air libre. Les bateaux sont décorés. Les gens portent des habits anciens. C\'est très beau !'},
     {nm:'Le Cottage des Dunes',c:[50.402275,1.566258],vi:{bg:'linear-gradient(135deg,#650F40,#9B1B62)',em:'🏰',cap:'Cottage des Dunes'},img:'photos/cottagedesdunes.png',rd:'Le Cottage des Dunes est dans le quartier de Lhomel. Avant, c\'était un casino nommé «\u00a0Casino des Lapins\u00a0». Il a été construit en 1883.',q:'Pourquoi ce casino s\'appelait «\u00a0Casino des Lapins\u00a0» ?',op:['On y organisait des courses de lapins','Il appartenait à un monsieur Lapin','Il était dans les garennes, là où vivaient les lapins'],ok:2,wy:'Le casino était dans les garennes. Les garennes sont des terrains où vivent les lapins sauvages. Les gens ont donc appelé cet endroit «\u00a0Casino des Lapins\u00a0». Simple comme bonjour !',anec:'🎭 Dans la rue Carnot, il y a 4 chalets avec des noms amusants : Pierrot, Colombine, Arlequin et Pierrette. Ce sont des personnages du théâtre populaire italien.'}
   ]},
-  {id:3,ic:'🌲',col:'#00707A',cd:'#00464D',cl:'#DDF0F1',nm:'Escapade au Nord',ds:'Dunes, Institut Calot et Bois Magnier',acc:'⚠️ Sable et sentiers, partiellement accessible',dist:'3,9 km',time:'1h15',mission:'Compte le nombre de dunes ou de ganivelles que tu croises sur ce parcours.',
+  {id:3,ic:'trees',col:'#00707A',cd:'#00464D',cl:'#DDF0F1',nm:'Escapade au Nord',ds:'Dunes, Institut Calot et Bois Magnier',acc:'⚠️ Sable et sentiers, partiellement accessible',dist:'3,9 km',time:'1h15',mission:'Compte le nombre de dunes ou de ganivelles que tu croises sur ce parcours.',
   steps:[
     {nm:'Départ — Centre La Molière',c:[50.403718,1.569736],vi:{bg:'linear-gradient(135deg,#00464D,#00707A)',em:'🌲',cap:'Départ — La Molière'},img:'photos/lamolliere.png',rd:'Tu es devant le Centre La Molière. Avant de partir à l\'aventure, voici un petit peu de son histoire.',q:'En quelle année le Centre La Molière a-t-il été créé ?',op:['En 1952, par la Sécurité Sociale','En 1900, comme hôpital pour enfants malades','En 1985, par la Région Hauts-de-France'],ok:0,wy:'Le Centre La Molière a été créé en 1952 par la Sécurité Sociale. Aujourd\'hui, il est géré par l\'UGECAM (Union pour la Gestion des Établissements de Caisses d\'Assurance Maladie) des Hauts-de-France. Il aide des personnes en situation de handicap à préparer un métier, grâce à des formations comme agent de restauration, soudeur, vendeur ou agent d\'entretien.',anec:'🏅 Le centre est installé au 19-21 Boulevard de Paris, exactement là où commence notre jeu de piste ! Il accueille aujourd\'hui plus de 150 personnes pour les accompagner vers un nouveau métier.'},
     {nm:'La Dune de l\'Éole',c:[50.413074,1.561877],vi:{bg:'linear-gradient(135deg,#00707A,#00464D)',em:'🌅',cap:'Dune de l\'Éole'},img:'images/dunes-oyats.jpg',rd:'Termine à la Dune de l\'Éole. Depuis ce point haut, tu vois la plage, les dunes, la mer et les cerfs-volants. Par beau temps, tu peux voir la Baie de l\'Authie au sud.',q:'Quel record Bertrand Lambert a-t-il établi à Berck en 1991 ?',op:['Le record de distance en char à voile','Le record de vitesse sur sable en char à voile : 151,55 km/h','Le record de hauteur en cerf-volant'],ok:1,wy:'En 1991, Bertrand Lambert a roulé à 151,55 km/h sur le sable de Berck. C\'est un record du monde sur sable en char à voile. Berck est la capitale mondiale de ce sport !',anec:'🌿 L\'oyat est une plante incroyable. Plus le sable l\'enterre, plus elle pousse vite pour en sortir sa tête ! C\'est la seule plante capable de faire ça.'},
@@ -455,7 +567,7 @@ const ROUTES=[
     {nm:'L\'Institut Calot',c:[50.415354,1.564382],vi:{bg:'linear-gradient(135deg,#00707A,#00464D)',em:'🏛️',cap:'Institut Calot'},img:'photos/institucalot.jpg',rd:'Voici l\'Institut Calot. Il a été construit entre 1901 et 1906. Le Docteur Calot était un chirurgien très célèbre. Son hôpital pouvait accueillir 600 malades.',q:'Quel genre de patients très célèbres venait se faire soigner chez le Docteur Calot ?',op:['Des sportifs champions du monde','Des reines et des duchesses d\'Europe','Des artistes peintres'],ok:1,wy:'Le Docteur Calot était si connu que des personnes très importantes venaient à Berck. La reine Nathalie de Serbie et une duchesse de Russie ont été soignées ici. Il a reçu la Légion d\'Honneur.',anec:'📚 Le Docteur Calot a écrit des livres sur la médecine des os. Il est né en 1861. Il est mort en 1944. C\'est grâce à lui que Berck est devenu si connu.'},
     {nm:'Le Bois Magnier',c:[50.412283,1.578512],vi:{bg:'linear-gradient(135deg,#00464D,#00707A)',em:'🌲',cap:'Bois Magnier'},img:'photos/boismagnier.png',rd:'Termine au Bois Magnier. C\'est un bois en pleine ville. Il a un terrain de Disc Golf. Ce sport se joue avec des disques volants. C\'est amusant et accessible à tous !',q:'Comment gagne-t-on au Disc Golf ?',op:['En lançant le disque le plus loin','En atteignant les paniers avec le moins de lancers','En rattrapant le disque en l\'air'],ok:1,wy:'On lance un disque vers un panier en métal. Celui qui arrive au panier avec le moins de lancers gagne. C\'est comme le golf mais avec un disque. Tout le monde peut jouer !',anec:'🐿️ Le Bois Magnier est aussi un refuge pour les animaux. Des écureuils, des hérissons et des chauves-souris y vivent. De vieux chênes centenaires y poussent encore.'}
   ]},
-  {id:4,ic:'🏖️',col:'#2A3B8F',cd:'#1B2760',cl:'#E3E6F7',nm:'Bord de Mer & Sports',ds:'Plage, char à voile, cerfs-volants et hôpital maritime',acc:'⚠️ Sable, partiellement accessible',dist:'2,6 km',time:'1h11',mission:'Compte le nombre de cerfs-volants ou de chars à voile que tu vois pendant le parcours.',
+  {id:4,ic:'waves',col:'#2A3B8F',cd:'#1B2760',cl:'#E3E6F7',nm:'Bord de Mer & Sports',ds:'Plage, char à voile, cerfs-volants et hôpital maritime',acc:'⚠️ Sable, partiellement accessible',dist:'2,6 km',time:'1h11',mission:'Compte le nombre de cerfs-volants ou de chars à voile que tu vois pendant le parcours.',
   steps:[
     {nm:'Départ — Centre La Molière',c:[50.403718,1.569736],vi:{bg:'linear-gradient(135deg,#1B2760,#2A3B8F)',em:'🏖️',cap:'Départ — La Molière'},img:'photos/lamolliere.png',rd:'Tu es devant le Centre La Molière. Avant de partir à l\'aventure, voici un petit peu de son histoire.',q:'En quelle année le Centre La Molière a-t-il été créé ?',op:['En 1952, par la Sécurité Sociale','En 1900, comme hôpital pour enfants malades','En 1985, par la Région Hauts-de-France'],ok:0,wy:'Le Centre La Molière a été créé en 1952 par la Sécurité Sociale. Aujourd\'hui, il est géré par l\'UGECAM (Union pour la Gestion des Établissements de Caisses d\'Assurance Maladie) des Hauts-de-France. Il aide des personnes en situation de handicap à préparer un métier, grâce à des formations comme agent de restauration, soudeur, vendeur ou agent d\'entretien.',anec:'🏅 Le centre est installé au 19-21 Boulevard de Paris, exactement là où commence notre jeu de piste ! Il accueille aujourd\'hui plus de 150 personnes pour les accompagner vers un nouveau métier.'},
     {nm:'La sculpture «\u00a0Marianne Toute Seule\u00a0»',c:[50.405322,1.559500],vi:{bg:'linear-gradient(135deg,#2A3B8F,#1B2760)',em:'🗿',cap:'Marianne Toute Seule'},img:'photos/marianne.jpeg',rd:'Sur l\'Esplanade Parmentier, cherche la sculpture «\u00a0Marianne Toute Seule\u00a0». Elle montre 2 femmes et un petit garçon. Elle représente les soignants qui s\'occupent des malades.',q:'Qui a créé cette sculpture en 1892 ?',op:['Auguste Rodin','Marie Cazin-Guillet, belle-sœur du médecin Henri Cazin','Jan Lavezzari, peintre berckois'],ok:1,wy:'Marie Cazin-Guillet était une artiste. Son beau-frère était le docteur Henri Cazin. Elle a créé cette sculpture pour dire merci aux médecins et soignants de Berck.',anec:'🛡️ En 1939, la sculpture a été cachée. Les Allemands prenaient les bronzes pour faire des armes. Après la guerre, la sculpture a été remise à sa place.'},
@@ -465,7 +577,7 @@ const ROUTES=[
     {nm:'Le Festival des Cerfs-Volants',c:[50.404500,1.556500],vi:{bg:'linear-gradient(135deg,#2A3B8F,#1B2760)',em:'🎑',cap:'Festival depuis 1987'},img:'photos/Rencontres%20Internationales%20de%20Cerfs-Volants%20de%20Berck-sur-Mer.jfif',rd:'Chaque printemps, le ciel de Berck se remplit de cerfs-volants géants. Il y a des animaux, des personnages, des formes inventées. Ce festival s\'appelle le RICV.',q:'Depuis quelle année Berck organise-t-il ce grand festival de cerfs-volants ?',op:['Depuis 1987','Depuis 1960','Depuis 2005'],ok:0,wy:'Le festival existe depuis 1987. Il s\'appelle les «\u00a0Rencontres Internationales de Cerfs-Volants\u00a0». Plus de 500\u00a0000 personnes viennent le voir chaque année.',anec:'🏁 Depuis 50 ans, une grande course de chars à voile a lieu à Berck. Elle s\'appelle les «\u00a06 heures de Berck\u00a0». Des équipes viennent de toute l\'Europe.'},
     {nm:'L\'Hôpital Maritime',c:[50.400875,1.558061],vi:{bg:'linear-gradient(135deg,#1B2760,#2A3B8F)',em:'🏨',cap:'Hôpital Maritime 1869'},img:'photos/hopitalmaritime.png',rd:'L\'Hôpital Maritime a été ouvert le 18 juillet 1869. L\'Impératrice Eugénie est venue pour l\'inauguration. Au départ, il soignait uniquement des enfants malades des os.',q:'Quel est le premier nom de l\'Hôpital Maritime en 1869 ?',op:['Hôpital de la Côte d\'Opale','Hôpital Napoléon','Hôpital des Sables'],ok:1,wy:'En 1869, l\'hôpital s\'appelait «\u00a0Hôpital Napoléon\u00a0». Après la chute de Napoléon III, il a changé de nom plusieurs fois. En 1961, il a pris le nom «\u00a0Hôpital Maritime de Berck-sur-Mer\u00a0».',anec:'📈 En 1910, l\'hôpital a été agrandi. Il pouvait accueillir 1\u00a0000 malades. C\'est énorme pour l\'époque !'}
   ]},
-  {id:5,ic:'🔦',col:'#5B2090',cd:'#3D126B',cl:'#EDE5F5',nm:'Le Phare et la Baie',ds:'Phare, calvaire, monument et phoques',acc:'⚠️ Sable, partiellement accessible',dist:'2,8 km',time:'1h02',mission:'Trouve une coquille vide sur la plage, ou repère un phoque au loin (reste à 300 m minimum).',
+  {id:5,ic:'lighthouse',col:'#5B2090',cd:'#3D126B',cl:'#EDE5F5',nm:'Le Phare et la Baie',ds:'Phare, calvaire, monument et phoques',acc:'⚠️ Sable, partiellement accessible',dist:'2,8 km',time:'1h02',mission:'Trouve une coquille vide sur la plage, ou repère un phoque au loin (reste à 300 m minimum).',
   steps:[
     {nm:'Départ — Centre La Molière',c:[50.403718,1.569736],vi:{bg:'linear-gradient(135deg,#3D126B,#5B2090)',em:'🔦',cap:'Départ — La Molière'},img:'photos/lamolliere.png',rd:'Tu es devant le Centre La Molière. Avant de partir à l\'aventure, voici un petit peu de son histoire.',q:'En quelle année le Centre La Molière a-t-il été créé ?',op:['En 1952, par la Sécurité Sociale','En 1900, comme hôpital pour enfants malades','En 1985, par la Région Hauts-de-France'],ok:0,wy:'Le Centre La Molière a été créé en 1952 par la Sécurité Sociale. Aujourd\'hui, il est géré par l\'UGECAM (Union pour la Gestion des Établissements de Caisses d\'Assurance Maladie) des Hauts-de-France. Il aide des personnes en situation de handicap à préparer un métier, grâce à des formations comme agent de restauration, soudeur, vendeur ou agent d\'entretien.',anec:'🏅 Le centre est installé au 19-21 Boulevard de Paris, exactement là où commence notre jeu de piste ! Il accueille aujourd\'hui plus de 150 personnes pour les accompagner vers un nouveau métier.'},
     {nm:'Le Phare de Berck',c:[50.398378,1.560798],vi:{bg:'linear-gradient(135deg,#5B2090,#3D126B)',em:'🔦',cap:'Phare de Berck'},img:'photos/phare.png',rd:'Le phare actuel a été construit en 1949. Il mesure 40 mètres. Il a des rayures rouges et blanches. Il s\'allume tout seul depuis 1996. C\'est un Monument Historique depuis 2010.',q:'Pourquoi a-t-on construit un phare plus haut en 1868 ?',op:['L\'ancien était trop vieux','Un petit hôpital construit devant lui cachait sa lumière','La mer avait emporté l\'ancien'],ok:1,wy:'En 1861, un petit hôpital a été construit juste devant le phare. Il cachait la lumière. Les bateaux ne voyaient plus bien. Alors on a fait une tour plus haute pour que la lumière passe au-dessus.',anec:'🏠 L\'ancienne maison du gardien est devenue la Maison du Patrimoine. On peut voir comment vivaient les pêcheurs. C\'est gratuit ! Téléphone : 03 21 09 44 04.'},
@@ -656,18 +768,18 @@ function rWelcome(app){
   <h1 class="hero__h1">Berck Aventure</h1>
   <p class="hero__sub">Jeu de piste au départ de l'UGECAM Centre La Molière<br>Boulevard de Paris · Berck-sur-Mer</p>
   <div style="background:rgba(255,255,255,.13);border:2px solid rgba(255,255,255,.4);border-radius:var(--r-xl);
-       padding:1.25rem 1.5rem;text-align:left;width:100%;max-width:440px;margin-bottom:1.75rem">
-    ${[['🗺️','<strong>5 parcours</strong> thématiques avec carte interactive'],
-       ['📏','1,7 à 3,9 km aller-retour — de 1h à 1h15'],
-       ['♿','Accessibilité indiquée pour chaque parcours'],
-       ['🏅','Un <strong>badge de découvreur</strong> à la fin !'],
-       ['🎨','Couleurs accessibles aux daltoniens (🔵 ✅ / 🟠 ❌)']
-      ].map(([i,t])=>`<div style="display:flex;align-items:flex-start;gap:.75rem;font-size:clamp(.9375rem,2.5vw,1rem);margin-bottom:.75rem;line-height:1.5">
-        <span aria-hidden="true" style="font-size:1.375rem;flex-shrink:0;margin-top:.05rem">${i}</span><span>${t}</span></div>`).join('')}
+       padding:2rem 1.75rem;text-align:left;width:100%;max-width:440px;margin-bottom:1.75rem">
+    ${[['map','<strong>5 parcours</strong> thématiques avec carte interactive'],
+       ['ruler','1,7 à 3,9 km aller-retour — de 1h à 1h15'],
+       ['wheelchair','Accessibilité indiquée pour chaque parcours'],
+       ['medal','Un <strong>badge de découvreur</strong> à la fin !'],
+       ['palette','Testé pour le daltonisme : bleu&nbsp;✓ / orange&nbsp;✗ (jamais couleur seule)']
+      ].map(([i,t])=>`<div style="display:flex;align-items:flex-start;gap:.75rem;font-size:clamp(1rem,2.5vw,1.0625rem);margin-bottom:.875rem;line-height:1.55">
+        <span aria-hidden="true" style="flex-shrink:0;margin-top:.1rem">${ic(i,22)}</span><span>${t}</span></div>`).join('')}
   </div>
   <button class="hero__cta" style="color:var(--c-pd)" onclick="set({sc:'routes'})"
           aria-label="Voir les 5 parcours disponibles">
-    <span aria-hidden="true">🚀</span> Choisir mon parcours !
+    <span aria-hidden="true">${ic('compass',20)}</span> Choisir mon parcours !
   </button>
   </div>
 </div>`;
@@ -683,22 +795,22 @@ function rRoutes(app){
 ${ROUTES.map((r,i)=>`
 <div class="rcard" onclick="pickR(${i})" role="button" tabindex="0"
      onkeydown="if(event.key==='Enter'||event.key===' ')pickR(${i})"
-     aria-label="Choisir le parcours ${r.nm}, ${r.ds}, ${r.acc}, ${r.dist}, ${r.steps.length} étapes">
+     aria-label="Parcours ${r.nm}, ${r.ds}. ${r.acc}. Distance ${r.dist}, durée estimée ${r.time}, ${r.steps.length} étapes.">
   <div class="rcard__head" style="background:${r.col}18">
-    <span style="font-size:2.5rem" aria-hidden="true">${r.ic}</span>
+    <span style="color:${r.col}" aria-hidden="true">${ic(r.ic,40)}</span>
     <div>
       <div style="font-size:1.125rem;font-weight:900;color:${r.col}">${r.nm}</div>
-      <div style="font-size:.875rem;color:var(--c-ts);margin-top:.125rem">${r.ds}</div>
+      <div class="rcard__sub">${r.ds}</div>
     </div>
   </div>
   <div class="rcard__body">
-    <div style="display:flex;flex-wrap:wrap">
+    <div class="badge-row">
       <span class="badge-pill" style="background:${r.cl};color:${r.cd};border-color:${r.col}">${r.acc}</span>
-      <span class="badge-pill" style="background:var(--c-bg);color:var(--c-ts);border-color:var(--c-bol)">📏 ${r.dist}</span>
-      <span class="badge-pill" style="background:var(--c-bg);color:var(--c-ts);border-color:var(--c-bol)">⏱️ ${r.time}</span>
-      <span class="badge-pill" style="background:var(--c-bg);color:var(--c-ts);border-color:var(--c-bol)">${r.steps.length} étapes</span>
+      <span class="badge-pill" style="background:var(--c-bg);color:var(--c-ts);border-color:var(--c-bol)">${ic('ruler',16)} ${r.dist}</span>
+      <span class="badge-pill" style="background:var(--c-bg);color:var(--c-ts);border-color:var(--c-bol)">${ic('hourglass',16)} ${r.time}</span>
+      <span class="badge-pill" style="background:var(--c-bg);color:var(--c-ts);border-color:var(--c-bol)">${ic('compass',16)} ${r.steps.length} étapes</span>
     </div>
-    <div class="mission">🎁 Mission : ${r.mission}</div>
+    <div class="mission">${ic('gift',18)} Mission : ${r.mission}</div>
   </div>
 </div>`).join('')}
 </div>`;
@@ -733,16 +845,16 @@ function rGame(app){
     const nav=navHint(rt.steps,G.st);
     const navBlock = nav ? `
   <div class="hint" role="note" style="background:${rt.cl};border-color:${rt.col};color:${rt.cd}">
-    <span aria-hidden="true" style="font-size:1.25rem;flex-shrink:0">${nav.arrow}</span>
+    <span aria-hidden="true" style="flex-shrink:0">${icArrow(nav.deg,22)}</span>
     <span><strong>Direction ${nav.dir}</strong>, environ <strong>${nav.dist}</strong> à vol d'oiseau depuis l'étape précédente. Suis les rues dans cette direction générale (utilise une carte si besoin, le trajet réel est rarement en ligne droite).</span>
   </div>` : `
   <div class="hint" role="note" style="background:${rt.cl};border-color:${rt.col};color:${rt.cd}">
-    <span aria-hidden="true" style="font-size:1.25rem;flex-shrink:0">🚩</span>
+    <span aria-hidden="true" style="flex-shrink:0">${ic('flag',22)}</span>
     <span>C'est le point de départ, juste devant le Centre La Molière.</span>
   </div>`;
     const navGmapsBtn = nav ? `
   <button class="nav-btn" onclick="openNavModal()" aria-haspopup="dialog">
-    <span aria-hidden="true">🧭</span> Voir l'itinéraire détaillé (rues, plan)
+    <span aria-hidden="true">${ic('compass',18)}</span> Voir l'itinéraire détaillé (rues, plan)
   </button>` : '';
     panel=`
 <div class="card">
@@ -756,12 +868,12 @@ function rGame(app){
   ${navGmapsBtn}
   <p style="font-size:1rem;line-height:1.7;color:var(--c-ts);margin:.875rem 0">${step.rd}</p>
   <div class="hint" role="note">
-    <span aria-hidden="true" style="font-size:1.25rem;flex-shrink:0">📍</span>
+    <span aria-hidden="true" style="flex-shrink:0">${ic('pin',22)}</span>
     <span>Rendez-vous à cet endroit, puis cliquez sur le <strong>marqueur animé</strong> sur la carte, ou sur le bouton ci-dessous.</span>
   </div>
   <button class="btn" style="background:${rt.col}" onclick="set({ph:'question'})"
           aria-label="Je suis arrivé à l'étape ${G.st+1}">
-    <span aria-hidden="true">✔</span> J'y suis ! Voir la question
+    <span aria-hidden="true">${ic('checkCircle',18)}</span> J'y suis ! Voir la question
   </button>
 </div>`;
     if(nav){
@@ -777,23 +889,23 @@ function rGame(app){
     <div class="modal-sub">${prevStep.nm.replace(/\\u00a0/g,' ')} → ${step.nm.replace(/\\u00a0/g,' ')}</div>
 
     <div class="modal-row">
-      <span class="modal-row__ic" aria-hidden="true">${nav.arrow}</span>
+      <span class="modal-row__ic" aria-hidden="true">${icArrow(nav.deg,20)}</span>
       <div><div class="modal-row__lbl">Direction générale</div>
         <div class="modal-row__val">${nav.dir}, environ ${nav.dist} à vol d'oiseau</div></div>
     </div>
     <div class="modal-row">
-      <span class="modal-row__ic" aria-hidden="true">📍</span>
+      <span class="modal-row__ic" aria-hidden="true">${ic('pin',20)}</span>
       <div><div class="modal-row__lbl">Vous partez de</div>
         <div class="modal-row__val">${streetFrom?streetFrom:"Rue non confirmée — voir la carte"}</div></div>
     </div>
     <div class="modal-row">
-      <span class="modal-row__ic" aria-hidden="true">🏁</span>
+      <span class="modal-row__ic" aria-hidden="true">${ic('flagCheck',20)}</span>
       <div><div class="modal-row__lbl">Vous arrivez à</div>
         <div class="modal-row__val">${streetTo?streetTo:"Rue non confirmée — voir la carte"}</div></div>
     </div>
 
     <a class="modal-maps" href="${gurl}" target="_blank" rel="noopener">
-      <span aria-hidden="true">🗺️</span> Ouvrir l'itinéraire à pied dans Google Maps
+      <span aria-hidden="true">${ic('map',18)}</span> Ouvrir l'itinéraire à pied dans Google Maps
     </a>
     <p class="modal-note">Google Maps calcule le vrai chemin dans les rues (pas à vol d'oiseau) à partir de vos coordonnées GPS actuelles. Nécessite une connexion internet.</p>
   </div>
@@ -840,20 +952,20 @@ function rGame(app){
   <div>${opts}</div>
   <div class="fbbox ${ok?'fbbox-ok':'fbbox-ko'}" role="alert" aria-live="assertive">
     <div class="fbbox__h">
-      <span aria-hidden="true">${ok?'✅':'❌'}</span>
+      <span aria-hidden="true">${ok?ic('checkCircle',22):ic('xCircle',22)}</span>
       <span>${ok?'Bonne réponse !':'Pas tout à fait...'}</span>
     </div>
     ${!ok?`<p style="margin-bottom:.5rem">Bonne réponse : <strong>${step.op[step.ok]}</strong></p>`:''}
     <p>${step.wy}</p>
   </div>
   <div class="anec" role="note">
-    <strong>💡 Le saviez-vous ?</strong><br>${step.anec}
+    <strong>${ic('bulb',18)} Le saviez-vous ?</strong><br>${step.anec}
   </div>
   ${INFO[step.nm]?`<div class="info-card" role="note" style="background:${INFO[step.nm].bg};border-color:${INFO[step.nm].bo};color:${INFO[step.nm].bo}"><div class="info-card__title">${INFO[step.nm].titre}</div>${INFO[step.nm].items.map(it=>`<div class="info-card__item">${it}</div>`).join('')}</div>`:''}}
   <div style="height:.25rem"></div>
   <button class="btn" style="background:${rt.col}" onclick="nx()"
           aria-label="${G.st<tot-1?'Étape suivante':'Voir mon badge'}">
-    <span aria-hidden="true">${G.st<tot-1?'➡':'🏁'}</span>
+    <span aria-hidden="true">${G.st<tot-1?ic('arrowRight',18):ic('flagCheck',18)}</span>
     ${G.st<tot-1?'Étape suivante':'Voir mon badge !'}
   </button>
 </div>`;
@@ -867,7 +979,7 @@ function rGame(app){
     <div class="sechead">
       <button class="btn btn-ghost" onclick="set({sc:'routes'})"
               aria-label="Retour au choix de parcours">
-        <span aria-hidden="true">←</span> Parcours
+        <span aria-hidden="true">${ic('arrowLeft',18)}</span> Parcours
       </button>
       <div class="scbadge" aria-label="Score : ${G.sc2} bonne${G.sc2>1?'s':''} réponse${G.sc2>1?'s':''} sur ${G.st}">
         ⭐ ${G.sc2} / ${G.st}
@@ -897,7 +1009,7 @@ function rGame(app){
 function rEnd(app){
   const rt=G.rt,tot=rt.steps.length,sc=G.sc2;
   const pct=Math.round((sc/tot)*100);
-  const tr=sc===tot?'🏆':sc>=tot*.8?'🥇':sc>=tot*.6?'🥈':'🥉';
+  const trIcon=sc===tot?'trophy':'medal';
   const msg=sc===tot?'Score parfait !':sc>=tot*.8?'Excellent travail !':sc>=tot*.6?'Très bien joué !':'Bonne exploration !';
   const sub=sc===tot?'Vous connaissez Berck comme votre poche !':sc>=tot*.8?'Vous êtes un vrai explorateur berquois !':sc>=tot*.6?'Berck n\'a presque plus de secrets pour vous !':'Chaque visite est une nouvelle découverte !';
   const td=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
@@ -906,7 +1018,7 @@ function rEnd(app){
   const recap=rt.steps.map((s,i)=>`
 <div class="rcap ${G.ans[i]?'rcap-ok':'rcap-ko'}" role="listitem"
      aria-label="Étape ${i+1} ${s.nm} : ${G.ans[i]?'réussie':'échouée'}">
-  <span aria-hidden="true">${G.ans[i]?'✅':'❌'}</span>
+  <span aria-hidden="true">${G.ans[i]?ic('checkCircle',18):ic('xCircle',18)}</span>
   <span style="font-size:.875rem">${s.nm}</span>
 </div>`).join('');
 
@@ -916,8 +1028,8 @@ function rEnd(app){
      padding:clamp(1.25rem,4vw,1.75rem);text-align:center;color:#fff;margin-bottom:1rem"
      role="region" aria-label="Résultats">
   <span role="img" aria-label="${msg}"
-        style="font-size:clamp(3rem,12vw,4.5rem);display:block;margin-bottom:.5rem;animation:bounce .9s ease 2">
-    ${tr}
+        style="display:block;margin-bottom:.5rem;animation:bounce .9s ease 2">
+    ${ic(trIcon,80)}
   </span>
   <h1 style="font-size:clamp(1.375rem,4vw,1.875rem);font-weight:900;margin-bottom:.25rem">${msg}</h1>
   <p style="opacity:.9;margin-bottom:1.25rem;font-size:.9375rem">${sub}</p>
@@ -929,30 +1041,37 @@ function rEnd(app){
     </div>
     <div style="font-size:.9375rem;opacity:.85;margin-top:.25rem">${pct}&nbsp;% de bonnes réponses</div>
     <div style="margin-top:.625rem;font-size:1.5rem" aria-hidden="true">
-      ${rt.steps.map((_,i)=>G.ans[i]?'⭐':'○').join(' ')}
+      ${rt.steps.map((_,i)=>G.ans[i]?ic('star',20):ic('circleO',20)).join(' ')}
     </div>
   </div>
 </div>
 
 <div class="hint" role="note" style="justify-content:center;text-align:center">
-  <span aria-hidden="true" style="font-size:1.25rem;flex-shrink:0">🚶‍♀️🏥</span>
-  <span>C'était top&nbsp;! Il ne reste plus qu'à reprendre le chemin du retour vers le Centre La Molière. À bientôt&nbsp;! 🙂</span>
+  <span aria-hidden="true" style="display:flex;gap:.25rem;flex-shrink:0">${ic('walk',22)}${ic('cross',22)}</span>
+  <span>C'était top&nbsp;! Il ne reste plus qu'à reprendre le chemin du retour vers le Centre La Molière. À bientôt&nbsp;! ${ic('smile',18)}</span>
 </div>
 
-<div class="diploma" role="region" aria-label="Diplôme du découvreur">
-  <span class="diploma__ic" role="img" aria-label="Diplôme">🎓</span>
-  <h2 class="diploma__h">Diplôme du Découvreur</h2>
-  <p class="diploma__sub">Berck-sur-Mer · ${td}</p>
-  <div class="diploma__seal">
-    Ce diplôme atteste que vous avez complété<br>
-    le parcours <strong>«&nbsp;${rt.ic} ${rt.nm}&nbsp;»</strong><br>
-    depuis l'UGECAM Centre La Molière<br>
-    et découvert les trésors de la Côte d'Opale !
+<div class="diploma" role="region" aria-label="Diplôme du découvreur" style="--diploma-col:${rt.col}">
+  <div class="diploma__watermark" aria-hidden="true">${icFull('compass')}</div>
+  <div class="diploma__content">
+    <span class="diploma__ic" role="img" aria-label="Diplôme">${ic('cap',56)}</span>
+    <div class="diploma__eyebrow">Berck Aventure</div>
+    <h2 class="diploma__h">Diplôme du Découvreur</h2>
+    <div class="diploma__seal">
+      Ce diplôme atteste que vous avez terminé<br>
+      le parcours <strong>${ic(rt.ic,16)} ${rt.nm}</strong><br>
+      depuis l'UGECAM Centre La Molière,<br>
+      à Berck-sur-Mer.
+    </div>
+    <div class="diploma__stamp">${ic('checkCircle',22)}<span>Parcours<br>validé</span></div>
+    <p class="diploma__sub">${td}</p>
+    <div class="diploma__num">N° ${diplomaNum(rt.id,new Date())}</div>
+    <div class="diploma__brand">${ic('compass',16)} Berck Aventure</div>
   </div>
 </div>
 
 <div class="card">
-  <h2 style="font-size:1rem;font-weight:900;margin-bottom:.875rem">📋 Récapitulatif</h2>
+  <h2 style="font-size:1rem;font-weight:900;margin-bottom:.875rem;display:flex;align-items:center;gap:.5rem">${ic('clipboard',20)} Récapitulatif</h2>
   <div role="list">${recap}</div>
 </div>
 
@@ -960,17 +1079,17 @@ function rEnd(app){
   <button class="btn" style="background:${rt.col}"
           onclick="set({sc:'game',rt:G.rt,st:0,ph:'riddle',ch:null,sc2:0,ans:[]})"
           aria-label="Recommencer ce parcours">
-    <span aria-hidden="true">🔄</span> Recommencer
+    <span aria-hidden="true">${ic('refresh',18)}</span> Recommencer
   </button>
   <button class="btn btn-sec"
           onclick="set({sc:'routes'})"
           aria-label="Choisir un autre parcours">
-    <span aria-hidden="true">🗺️</span> Autre parcours
+    <span aria-hidden="true">${ic('map',18)}</span> Autre parcours
   </button>
 </div>
 <button class="btn btn-ghost" style="width:100%;display:flex;justify-content:center"
         onclick="set({sc:'welcome'})" aria-label="Retour à l'accueil">
-  🏠 Accueil
+  <span aria-hidden="true" style="display:inline-flex;vertical-align:-4px;margin-right:.35rem">${ic('home',18)}</span>Accueil
 </button>
 
 </div>`;
